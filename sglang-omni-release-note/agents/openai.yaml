@@ -1,0 +1,17 @@
+interface:
+  display_name: sglang omni release note
+  short_description: Create evidence-based SGLang-Omni release highlights and concise
+    Chinese WeChat announcements for a tag, commit, or date range. Use when summarizing
+    major model support, performance improvements, serving features, hardware coverage,
+    runtime infrastructure, and reliability changes. Default to a four-pillar WeChat
+    summary; rely on GitHub automatic release notes for exhaustive PR lists unless
+    the user explicitly requests a manual changelog.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
