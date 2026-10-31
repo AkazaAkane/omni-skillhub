@@ -1,0 +1,3 @@
+interface:
+  display_name: "SGLang-Omni Humanize Review"
+  short_description: "Review Omni changes using maintainer evidence"
