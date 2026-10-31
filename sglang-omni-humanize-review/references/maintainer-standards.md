@@ -1,52 +1,38 @@
-# Omni maintainer standards
+# Contracts, review methods, and historical observations
 
-Read this for every review. This combines the user's existing `sglang-omni-review-pr` doctrine with the linked public Omni sources, checked on 2026-10-30, rather than claiming to speak for every maintainer. The severity/verdict and experiment-design guidance below are adopted review conventions, not quotations attributed to a particular maintainer. Resolve current rules from the reviewed revision's `AGENTS.md` and its referenced coding-style document. If source locations move, follow the target tree.
+Keep these layers separate. Only the target revision establishes the current repository contract. Review methods describe how to reason; historical observations generate hypotheses and may include obsolete architecture or accepted exceptions.
 
-## Keep the request path coherent
+## Current contracts: resolve before history
 
-[Issue #188](https://github.com/sgl-project/sglang-omni/issues/188) challenges overlapping delegation layers, dynamic interface adaptation, duplicated mechanics, and confusing ownership. Its refactor goals include preserving functionality/performance and reducing new-model onboarding cost. Its old layer names and code-volume targets describe that proposal, not today's required architecture.
+Read the reviewed revision's applicable `AGENTS.md`, referenced coding-style instructions, public interfaces, ownership boundaries and closest working implementations. Subject to the user's instructions, those current sources determine whether a change violates a rule. Cite that actual source when asserting a design inconsistency. Do not substitute a historical style snapshot or a maintainer's identity for a current rule.
 
-Review implication: trace the actual request and find the nearest existing implementation before asking for a new interface. A new layer needs a distinct responsibility; fewer lines alone do not prove a safe refactor.
+The previously checked [coding-style snapshot](https://github.com/sgl-project/sglang-omni/blob/a91bcac9d550c41491746de7773efa9432ee2c00/.claude/skills/code-review/coding-style.md) is a navigation pointer, not certification of today's rules. Resolve its current location through the target's instructions. Likewise, shared runtime ownership must be established from current interfaces/callers before treating model-local implementation as duplication.
 
-[Issue #661](https://github.com/sgl-project/sglang-omni/issues/661) identifies duplicated per-model serving optimizations, benchmark lifecycle glue, filler comments, and tests that repeat accuracy CI. It places reusable mechanics in shared runtime code and model semantics in model directories.
+## Review methods: stable execution discipline
 
-Review implication: check existing helpers and shared contracts first. Preserve regression tests that catch lifecycle, concurrency, and boundary failures which accuracy CI does not cover. Do not turn this issue into a blanket ban on unit tests or a mandate to abstract every similarity.
+These methods incorporate the user's existing `sglang-omni-review-pr`; they are adopted review practice, not historical quotations:
 
-## Configuration has an owner
+- Fix the exact target and trace callers, config and real dispatch before consulting episodes. Record independent invariants and risk hypotheses first. Inspect the whole changed path; green CI and a persuasive PR description do not establish correctness.
+- For each invariant, locate validation, reachable violations, fallback semantics, mutation/initialization timing and regression coverage. Trace lifecycle and resource ownership where changed. Interpret exceptions, attribute defaults and environment settings by their actual contract; do not ban tokens or demand universal defensive handling.
+- Search actual existing helpers before alleging duplication or asking for abstractions. Establish distinct responsibility and material maintenance cost; neither a small file nor low reuse count alone proves a finding. Keep changes and requested validation causally tied to the stated problem.
+- Separate code-derived facts, observed results, author reports, inference, unknowns and proposals. Test the actual candidate, not an unverified fallback. One boot is not qualification; parity is not speedup; local speedup is not E2E improvement; projection is not measurement.
+- Check controls, sample/failure counts, variance, quality and claim scope when a measurement matters. Preserve outliers unless a documented invalidation reason justifies exclusion. Reproduce the CI gate's actual conditions and distinguish raw references from slack. Fast runtime failure should preserve available diagnostic metrics.
+- Require the applicability and evidence chain in `SKILL.md` before promoting a historical concern. Current-code findings need no precedent. Unknown triggers remain hypotheses; missing proof may challenge a significant claim but is not evidence that a runtime bug occurred.
 
-[The review on #779](https://github.com/sgl-project/sglang-omni/pull/779#issuecomment-4712162612) asks for server arguments instead of environment arguments for serving tuning. This supports using the existing discoverable configuration route. It does not establish a universal ban on environment variables or new flags.
+## Historical observations: read after the independent pass
 
-Trace ownership from public input to the executing component. Defaults should be owned once and forwarded through existing typed surfaces. Separate an omitted parameter from an explicit override when a model has different defaults. Bootstrap/CI environment variables may already be the repository convention; verify their role before criticizing them.
+The following are bounded navigation summaries. Expand the raw episode and relevant linked discussion before using an observation in a finding. The source index and raw/interpretation protocol are in [history-and-sources.md](history-and-sources.md).
 
-## Validate the right model at the right boundary
+| Observation | Source | Scope and exception to check |
+| --- | --- | --- |
+| Overlapping delegation and repeated mechanics increased onboarding cost in an older architecture. | [Issue #188](https://github.com/sgl-project/sglang-omni/issues/188) | Its layer names and code-volume targets are historical. Establish today's ownership and actual redundant responsibility first. |
+| TTS implementations repeated framework mechanics; some tests/comments and benchmark lifecycle glue carried redundant cost. | [Issue #661](https://github.com/sgl-project/sglang-omni/issues/661) | Not a ban on unit tests, model-specific semantics or small helpers. Contract/race regressions may be absent from accuracy CI. |
+| A reviewer requested server arguments for serving tuning instead of environment arguments. | [PR #779 comment](https://github.com/sgl-project/sglang-omni/pull/779#issuecomment-4712162612) | Verify the current config owner and author response; bootstrap/process/CI environment conventions may differ. |
+| Benchmark artifacts were removed, while required fields of a small config were retained. | [PR #1090 artifact](https://github.com/sgl-project/sglang-omni/pull/1090#discussion_r3610888803), [config](https://github.com/sgl-project/sglang-omni/pull/1090#discussion_r3610889749) | The resolution supports retaining necessary configuration. Small config size is not a deletion rule. |
+| A global language enum admitted values another model could not execute; reference checks occurred too late. | [PR #1090 language](https://github.com/sgl-project/sglang-omni/pull/1090#discussion_r3611005830), [validation](https://github.com/sgl-project/sglang-omni/pull/1090#discussion_r3610997291) | Replies report #1104 fixes. Neither a reply nor a merge proves a fix exists at the currently reviewed revision. |
+| An author explicitly scoped a local parity/performance experiment away from an E2E RTF claim. | [PR #1441](https://github.com/sgl-project/sglang-omni/pull/1441) | Author-reported evidence, not independent replication or a universal benchmark protocol endorsed by an approval. |
 
-[The reference-input thread on #1090](https://github.com/sgl-project/sglang-omni/pull/1090#discussion_r3610997291) calls for public request checks before backend dispatch. [The language thread](https://github.com/sgl-project/sglang-omni/pull/1090#discussion_r3611005830) shows how a global enum expansion can admit inputs that another TTS model cannot handle. Follow the replies: the author reports fixes in #1104, including model-scoped language support.
-
-Review implication: public validation must reflect the selected model's actual capabilities. Do not silently ignore, rewrite, or fall back from unsupported semantics. Distinguish recoverable external failures from broken internal invariants; a fallback must have a valid, documented outcome.
-
-## Every retained surface needs a reason
-
-[The artifact thread on #1090](https://github.com/sgl-project/sglang-omni/pull/1090#discussion_r3610888803) questions a model-specific benchmark harness and generated artifacts; the author removes them. [The config thread](https://github.com/sgl-project/sglang-omni/pull/1090#discussion_r3610889749) questions a trivial config; the author keeps required architecture fields and removes a redundant default.
-
-Review implication: ask what durable behavior a file owns. The outcome supports removing unnecessary surfaces while retaining required configuration, rather than deleting all small configs.
-
-## Claims must fit the experiment
-
-[PR #1441](https://github.com/sgl-project/sglang-omni/pull/1441) reports numerical parity and an isolated optimization measurement while explicitly limiting the performance claim to that local operation. It is an author-reported example approved by a maintainer, not independent replication or a universal benchmark protocol.
-
-Review implication: separate local speedups from request latency/throughput, and numerical parity from model quality. For audio, count failed/empty requests, skipped samples, and actual output durations; report distributions when means hide stalls. A single boot does not establish backend/model support.
-
-## Current style and test instructions
-
-At the checked [coding-style snapshot](https://github.com/sgl-project/sglang-omni/blob/a91bcac9d550c41491746de7773efa9432ee2c00/.claude/skills/code-review/coding-style.md), relevant rules include small concrete abstractions, explicit units in names, concrete typing, module-scope imports, sparse useful comments, one configuration owner, shared runtime outside sibling model packages, and tests of public contracts. The document also contains specific formatting/control-flow requirements; read the complete target-branch version instead of reconstructing it from this summary.
-
-Use the target repository's configured checks. When a test needs an accelerator or optional backend, verify its marker and actual CI lane selection; a test that never runs does not provide coverage. Check existing suites before proposing a new test module.
-
-## Comment and severity discipline
-
-Make a comment explain a reachable failure or a demonstrated repository cost. Cite the target code and use history only when it applies. Ask a short question if intent is unclear; otherwise state the issue directly and request a minimal fix. An unresolved question is not automatically a blocker.
-
-Do not infer a current requirement from an old unmerged proposal, an author reply, a bot's review, or an approval with no explanation. Distinguish an absent benchmark from a demonstrated regression. Missing material evidence can justify withholding approval, but must not be described as a reproduced runtime failure.
+Do not turn repeated reviewer concerns into doctrine. Reviewer identity explains provenance; recency can motivate checking drift but does not automatically overrule an older still-applicable contract. An approval, merge or author saying “fixed” is not a concern-level verified outcome.
 
 ## Severity and verdict
 

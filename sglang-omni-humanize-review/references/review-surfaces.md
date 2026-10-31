@@ -1,6 +1,6 @@
 # Omni review surfaces
 
-Read only the rows relevant to the diff, then confirm paths, symbols, and behavior at the reviewed SHA. These are review prompts, not claims that every listed mode exists for every model/backend.
+Use relevant rows to build independent hypotheses before history, then derive three-route search terms. Mechanism words and candidate invariants below are prompts, not established bugs or claims that every mode exists. Confirm the actual contract, guard and reachable trigger at the reviewed SHA; discard an invariant that does not apply.
 
 ## Architecture and source routing
 
@@ -20,6 +20,25 @@ The checked [pipeline overview](https://github.com/sgl-project/sglang-omni/blob/
 | MLX/native C++/MPS/XPU paths, when present | Backend selection; import/build boundaries; dtype/quantization/layout; lazy execution and synchronization; buffer and stream lifetime; native/Python API semantics; unsupported modes. | Build plus actual affected-device execution when changed; golden/reference checks with tolerances and sample population; busy/deadline/cancel recovery for server changes. CUDA evidence does not qualify another backend. |
 | Memory/cache/offload | Residency by stage; peak versus steady-state allocation; graph-pinned buffers; transfer scheduling; cache key identity and invalidation; retained references after completion/error. | Memory under the affected request/concurrency/length; cold/warm distinctions; repeated-request plateau; correctness and latency with the actual offload setting. |
 | Tests/CI/benchmarks/docs | Tests invoke the candidate and meaningful assertions; backend markers map to real CI lanes; benchmark setup is reusable; documented commands/config match source. | Exact CI revision, suite/device/selection, sample/failure/skip counts; observed results separated from commands proposed or copied from history. |
+
+## Mechanism vocabulary and candidate invariants
+
+Use synonyms and actual symbols from the independent code pass; historical owners come from target-tree history. Conditions limit applicability after recall, rather than acting as a mandatory path filter.
+
+| Surface | Mechanism / condition terms | Candidate invariant to verify in current code |
+| --- | --- | --- |
+| API/router/lowering | capability mismatch, global enum, explicit default, pre-backend validation | A selected model accepts only executable parameters; omitted and explicit values preserve intended semantics. |
+| Pipeline/config | partial initialization, rollback, factory forwarding, terminal completion | Validation and failed startup cannot leave inconsistent topology or owned resources alive. |
+| Scheduling/runner | late arrival, slot reuse, stale row, exactly-once release, abort race | A cancelled/completed request cannot mutate a reused slot; each resource has one terminal owner. |
+| Relay/process/TP | tensor lifetime, fan-in, follower abort, shutdown ordering, IPC | Control and tensor lifetimes agree; leader/follower completion and cancellation do not deadlock or double-complete. |
+| Model integration | registry dispatch, checkpoint mapping, padding mask, EOS | The documented route executes the intended model and respects valid lengths/dtypes/output termination. |
+| Streaming audio | final flush, empty chunk, truncated tail, codec delay, chunk ordering | Required final audio is delivered once in order; allowed intermediate emptiness is not mistaken for request failure. |
+| ASR/diarization | resampling, sample/frame units, timestamp drift, speaker boundary | Length/timestamp units and model input rates remain consistent through conversion and aggregation. |
+| Realtime/session | generation identity, late output, truncation, backpressure, reconnect | Prior-turn output cannot escape after interruption into the next active generation. |
+| CUDA/compiled | graph replay, state reuse, capture address, active/padded rows | Candidate dispatch and replay use live request state with valid shapes/addresses and initialized buffers. |
+| MLX/native/MPS/XPU | lazy execution, synchronization, backend fallback, buffer lifetime | The selected backend truly executes the changed path; asynchronous values outlive their consumers. |
+| Memory/cache/offload | cache identity, eviction, retained reference, graph-pinned buffer | Reuse/eviction/offload preserves identity, required residency and release ownership. |
+| CI/benchmark/docs | unexecuted test, fallback coverage, noisy calibration, sample exclusion | The claimed path/population matches the actual test or experiment; failures are not silently dropped. |
 
 ## Existing integration guidance to consult
 

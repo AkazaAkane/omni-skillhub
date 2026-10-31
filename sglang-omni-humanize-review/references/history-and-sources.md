@@ -1,56 +1,89 @@
-# Historical evidence and source coverage
+# Episode data, retrieval, and evidence protocol
 
-## Provenance and limits
+## Coverage and provenance
 
-Workflow inspiration: [BBuf/AI-Infra-Auto-Driven-SKILLS, sglang-humanize-review](https://github.com/BBuf/AI-Infra-Auto-Driven-SKILLS/tree/2dd7b5d4d0d0813ba2639826386d73ae81e30809/skills/sglang-humanize-review), revision `2dd7b5d4d0d0813ba2639826386d73ae81e30809`, inspected 2026-10-30. This adaptation is independently authored; it does not vendor the upstream scripts, prose, SGLang corpus, or BBuf supplement.
+Workflow inspiration: [BBuf's sglang-humanize-review](https://github.com/BBuf/AI-Infra-Auto-Driven-SKILLS/tree/2dd7b5d4d0d0813ba2639826386d73ae81e30809/skills/sglang-humanize-review), inspected 2026-10-30. The user's existing `sglang-omni-review-pr` supplies revision discipline, invariant tracing, scoped claims and discriminating validation. This independently written skill does not vendor the upstream scripts/corpus or private transcript material. The previous Omni architecture/style pointers remain historical navigation aids.
 
-The Omni evidence below was retrieved on 2026-10-30. It is a curated index of two issues and three PRs, not a downloadable episode dataset, repository-wide sweep, or statistical account of maintainer behavior. Current architecture/style pointers use Omni revision `a91bcac9d550c41491746de7773efa9432ee2c00`; actual reviews must resolve the reviewed revision.
+The initial offline snapshot contains **9 whole-discussion envelopes**: PRs #779, #1090, #1104, #1356, #1441, #3173 and #3338; issues #188 and #661. Selection starts from prior Zhao-related sources, includes a linked fix and a few supplemental recent/model/backend examples. It is not all discussions involving Zhao, a statistically representative sample, or a repository-wide crawl. Participant discovery is optional; the schema is independent of reviewer identity. Exact capture times, event range, endpoint pagination/counts, source hashes, selection and missing coverage are in [omni-review-corpus.metadata.json](omni-review-corpus.metadata.json).
 
-The user's existing `sglang-omni-review-pr/SKILL.md` supplies the review doctrine: reuse/deletion, invariant tracing, fail-fast versus diagnostic completeness, support-claim scope, PR-type evidence, outlier/calibration handling, severity/verdict conventions, and minimum discriminating validation. Its `REFERENCES.md` helped identify the public sources below, which were checked directly. Relevant rules are incorporated into this skill so the sibling is not a runtime dependency. Its private transcript-based rationale is not included as public historical evidence. The new output preserves comprehension and historical synthesis before the prior skill's verdict/findings/evidence/validation/comment structure.
+## Raw evidence and interpretations are separate
 
-## Seed sources
+- [omni-review-corpus.jsonl.gz](omni-review-corpus.jsonl.gz) stores one JSON object per complete selected PR/issue envelope. `raw.metadata` preserves its title/body and captured PR head/base; `raw.conversation`, `raw.inline`, `raw.reviews`, `raw.commits` and `raw.files` preserve original REST objects where applicable. Bodies, languages, people/bots, empty review summaries, timestamps, URLs, diff context and comment/review commit IDs are retained without interpretation. This broad envelope avoids losing author replies or treating one comment as a resolved problem.
+- [omni-review-corpus.annotations.jsonl](omni-review-corpus.annotations.jsonl) contains separate concern-level interpretations keyed by `episode_id` and `annotation_id`. Multiple concerns can share one raw envelope. Each explanatory field uses `{value, status, source_urls}`; statuses distinguish `observed`, `inferred`, `author_report`, and `unknown`. Tags are explicitly inferred search aids. Unannotated envelopes remain searchable through raw text; annotations are not required for code-grounded findings.
+- `sources` records each API endpoint, pagination/counts and capture window. `completeness.endpoint_pagination=complete` certifies only the listed endpoint reads. It does not prove that GitHub exposed deleted/private material, that linked PRs were expanded, or that an individual concern was resolved. Reads are not an atomic snapshot. REST does not certify thread resolved/outdated state; published inline replies retain `in_reply_to_id`.
 
-Select only sources relevant to the changed mechanism. Read linked threads and their replies live when using them as evidence; the summaries are navigation aids.
+A concern interpretation should answer these questions, using unknown instead of inventing answers:
 
-| Source | Evidence type / attribution | Relevant concern and observed outcome |
-| --- | --- | --- |
-| [Issue #188](https://github.com/sgl-project/sglang-omni/issues/188) | Refactor proposal by `zhaochenyang20`, created 2026-03-24. | Overlapping layers, duplicate concepts/mechanics, preservation of behavior/performance. Treat its architecture as historical, not today's call graph. |
-| [Issue #661](https://github.com/sgl-project/sglang-omni/issues/661) | Refactor epic by `zhaochenyang20`, created 2026-06-02. | Shared mechanics versus model semantics; reusable benchmark lifecycle; filler comments and redundant tests. Its task table is historical, not proof of current implementation status. |
-| [PR #779 config comment](https://github.com/sgl-project/sglang-omni/pull/779#issuecomment-4712162612) | Top-level review concern from `zhaochenyang20`. | Requests serving arguments rather than environment arguments. Read author follow-ups/config changes before asserting the final resolution. |
-| [PR #1090 artifact thread](https://github.com/sgl-project/sglang-omni/pull/1090#discussion_r3610888803) and [config thread](https://github.com/sgl-project/sglang-omni/pull/1090#discussion_r3610889749) | Inline review by `zhaochenyang20`, 2026-07-19; author replies; request-changes and later approval. | Author removes benchmark harness/artifacts, retains required config fields, removes redundant default. Final disposition matters: this was not a ban on small config files. |
-| [PR #1090 validation thread](https://github.com/sgl-project/sglang-omni/pull/1090#discussion_r3610997291) and [language thread](https://github.com/sgl-project/sglang-omni/pull/1090#discussion_r3611005830) | Inline review by `SandyLuXY`, 2026-07-19; subsequent author replies. | Pre-backend reference validation and model-specific language support; replies report fixes in #1104. A reply is a reported resolution; check code before claiming that fix exists at another revision. |
-| [PR #1441](https://github.com/sgl-project/sglang-omni/pull/1441) | Author-reported optimization/parity experiment; approved by `zhaochenyang20` on 2026-08-10. | Local measurement explicitly scoped away from E2E RTF. Approval alone does not turn every implementation/test detail into a general rule. |
+| Field | Meaning / evidence boundary |
+| --- | --- |
+| `background` | What change/problem was under discussion? Cite PR/issue metadata. |
+| `code_revision` | Which implementation did the concern address? Use inline `commit_id`/`original_commit_id` and review `commit_id`; top-level comments can have unknown revision. Never assign today's captured head retroactively. |
+| `concern` | What failure/cost was alleged, by whom, and supported by which original text? |
+| `trigger_invariant` | Trigger and violated contract. Mark a derived mechanism as inferred. |
+| `requested_evidence` | Actual reproduction/experiment requested; unknown if none is established. |
+| `response` | Author/reviewer rebuttal, modification, experiment or lack of response. Distinguish reports from verified code. |
+| `outcome` | Accepted, withdrawn, reported fixed, unresolved or unknown, with supporting replies. Approval/merge is PR disposition, not proof that this concern was resolved. |
+| `applicability` | Model/backend/topology/version/architecture assumptions and exceptions; these still need checking against the new target. |
+| Provenance | Raw source URLs, annotation version/author/date, and envelope capture/completeness. Interpretations never overwrite raw evidence. |
 
-## Retrieve evidence for a review
+## Collection, refresh and interruption
 
-Use connected GitHub tools when available: search PRs/issues, then fetch the selected PR, changed files, and its combined conversation/inline/review timeline. Check whether the returned timeline is complete. If a connector truncates, use paginated GitHub API reads. Repository files must be read at the target head SHA.
+The [collector](../scripts/collect_omni_review_corpus.py) uses authenticated `gh api` GETs and Python's standard library. This gives a reusable CLI outside a connected session. In an interactive review, prefer available connected GitHub reads for small live checks; use paginated reads when a connector truncates.
 
-With an authenticated `gh` CLI, these read-only examples retrieve the three episode types for one seed PR; replace the number for the selected candidate. `--paginate --slurp` keeps every returned page. Store temporary output outside the reviewed working tree when useful.
-
-```bash
-gh api --paginate --slurp 'repos/sgl-project/sglang-omni/pulls/1090/comments?per_page=100'
-gh api --paginate --slurp 'repos/sgl-project/sglang-omni/issues/1090/comments?per_page=100'
-gh api --paginate --slurp 'repos/sgl-project/sglang-omni/pulls/1090/reviews?per_page=100'
-```
-
-For inline threads group by `in_reply_to_id`, retaining path, hunk, line/original line, reviewer, timestamps, original body and URL. Read all replies in the relevant group. Conversations may refer to several topics; review submissions may be empty but still record request-changes/approval state. An empty approval provides disposition, not rationale.
-
-Find more recent or more specific candidates by combining model/helper/scheduler names with risk terms. Example searches:
+From the skill directory, an explicit bounded refresh is:
 
 ```bash
-gh search prs --repo sgl-project/sglang-omni 'vocoder abort' --sort updated --limit 30
-gh search prs --repo sgl-project/sglang-omni 'MLX cancellation' --sort updated --limit 30
-gh search issues --repo sgl-project/sglang-omni 'reference encoding' --sort updated --limit 30
+python3 scripts/collect_omni_review_corpus.py \
+  --pr 779 --pr 1090 --pr 1104 --pr 1356 --pr 1441 --pr 3173 --pr 3338 \
+  --issue 188 --issue 661 --state-dir /tmp/omni-review-refresh-unique
 ```
 
-These searches return bounded candidate lists and do not exhaustively search every review comment. Use file history to find same-path changes when keyword search misses them, and inspect discussion bodies before accepting a match. When paths were renamed, resolve historical owners using target-tree history, for example `git log --follow -- path/to/file`; do not reuse SGLang's path aliases for Omni.
+Use a new empty state directory for each refresh. Each completed endpoint page is checkpointed; rerun the identical selection with `--resume` after interruption. A resumed attempt reuses its completed pages, so it is not a fresh live check. Do not resume an old attempt to certify new remote state.
 
-Search a relevant subsystem plus its demonstrated failure mechanism, then retrieve the selected discussions in full. If nothing relevant appears, widen once to the shared component or model family. Stop when the relevant discussions and newer counterexamples have been assessed, or explain the access/search limit; do not recrawl the whole repository for every small patch. A complete read of selected PRs is still bounded repository coverage.
+A successful refresh replaces selected whole envelopes and retains unselected envelopes. It refetches every selected endpoint from page 1, capturing current edited text and newly visible/deleted comments rather than skipping old comments by creation date. It does not reconstruct a pre-edit version GitHub no longer exposes or keep all earlier published snapshots in the corpus. Preserve a prior corpus externally when comparing versions. Original checkpoint responses remain in that attempt's state directory.
 
-## Synthesis to include in the review
+On failure/rate limiting, stop with a nonzero exit and record the incomplete attempt/error in metadata; completed pages remain resumable and the prior published corpus is retained. Do not silently publish partial selected discussions or retry indefinitely. Publication uses a temporary file and rename; corpus/hash metadata can be inconsistent after a process crash between their renames, so verify the recorded hash before use and rerun/resume if mismatched. Changed-file count mismatches fail capture rather than hiding API caps/concurrent changes.
 
-Report the search date and terms, selected PR/issue numbers, number/type of episodes actually read when countable, date range, and whether pagination was complete. Do not report corpus-wide `scanned/matched` statistics without a real corpus scan. Never claim completeness just because a search result hit its configured limit.
+Optional participant discovery selects the union of `commenter` and `reviewed-by` PR queries, then retains **every participant's context**:
 
-Summarize recurring concerns, requested fixes/experiments, author responses, and final disposition. Include newer disagreements instead of treating age or reviewer identity as automatic precedence. Current target-branch rules and executable contracts determine applicability.
+```bash
+python3 scripts/collect_omni_review_corpus.py --participant zhaochenyang20 \
+  --since 2026-10-01 --state-dir /tmp/omni-review-participant-unique
+```
 
-If GitHub is inaccessible, report that live history was unavailable. Use the seed summaries as historical context with that limitation and perform the available code review. Never block a useful correctness review solely because a historical sweep cannot run, and never present summarized or unseen comments as freshly retrieved quotations.
+This is bounded candidate discovery, not proof of all participation: PR search may miss discussions, edited comments may not update search as expected, and issue discussions need explicit selection. Search pagination/incomplete-results/1,000-result caps are checked; narrow the date window or explicitly select PRs if capped. The initial bundled snapshot used explicit selection, not this discovery mode. Refresh selected older envelopes periodically or when a finding depends on their present state. A capture records visible published state, not all prior comment edits or private/pending/deleted material.
+
+## Three-route retrieval
+
+First record current-code hypotheses, then search the offline corpus using the [search helper](../scripts/search_omni_review_corpus.py):
+
+```bash
+python3 scripts/search_omni_review_corpus.py \
+  --path sglang_omni/scheduling --symbol SessionRuntime \
+  --mechanism 'late arrival' --mechanism 'slot reuse' \
+  --mechanism 'exactly-once release' --condition MLX --condition 'CUDA Graph'
+```
+
+All routes are OR-unioned: component paths/symbols (including inline/file diff context), failure mechanisms/invariants (raw bodies and separate annotations), and backend/config/experiment conditions. A matching top-level discussion needs no path. Resolve renamed owners from target history, for example `git log --follow -- path/to/file`, instead of copying SGLang path aliases. Use vocabulary from [review-surfaces.md](review-surfaces.md#mechanism-vocabulary-and-candidate-invariants) as prompts, then actual current symbols and synonyms. There are no embeddings or reviewer-identity/recency boosts.
+
+The helper scans the whole supplied snapshot, deduplicates by envelope, and reports scanned/eligible/matched counts and routes. Ranking is lexical mechanism-hit count, then condition-hit count, then component-hit count, with stable ID ties. These scores do not determine semantic applicability or prove a bug. `--limit` bounds navigation results only; inspect further candidates or alternate words when recall is weak. An annotation match remains an inference with provenance, not raw testimony.
+
+Expand any candidate used in a finding, without truncating replies:
+
+```bash
+python3 scripts/search_omni_review_corpus.py --expand sgl-project/sglang-omni:pr:1090
+```
+
+This prints the entire raw envelope and separate interpretations. Reconstruct relevant inline threads through `in_reply_to_id`, inspect review bodies/states and top-level author responses, and follow linked fixes/rebuttals/counterexamples needed for that concern. A summary, first four comments, empty approval, or merged state cannot establish its outcome. Source rules/invariants outrank timestamp or reviewer identity. Newer exceptions should be considered, not automatically accepted.
+
+## Applicability, evidence gates and degradation
+
+For each historical concern considered, record shared mechanism, current corresponding code at the target SHA, reachable trigger, concrete consequence, material differences/counterexamples, and the minimum fix/check. Classify `applicable`, `inapplicable`, or `unknown`. Only the chain in `SKILL.md` permits a historical concern to support a finding. An applicable mechanism can still be guarded correctly in current code; search for that refutation. Unknown trigger/context stays a hypothesis or a narrowly stated evidence gap. Independently proven current bugs need no historical precedent.
+
+Daily review uses offline evidence with capture dates; perform live checks only for material stale/missing replies, linked resolutions, target-specific newer exceptions, or recent subsystem changes. Report missing access/pagination/context. If the snapshot is absent/corrupt, the hash differs, no candidates match, or live history is unavailable, continue current-code analysis and disclose the relevant limit. Widen synonyms/routes before assuming no precedent. Do not manufacture a historical synthesis or block a useful review solely on missing history.
+
+## Evaluate judgment, not report richness
+
+No review-quality improvement has been measured for this version. Mechanical tests validate capture/retrieval behavior, not finding precision. A later equal-time-budget comparison should hold out target PRs from raw data, interpretations, linked fixes and retrieval results; `--exclude-pr` prevents direct target retrieval/expansion but does not detect indirect answer leakage. Remove future fix/review references in other envelopes too. Use an archived pre-review target/code snapshot: today's PR body/edited comments cannot reliably reconstruct an earlier review state.
+
+Compare the previous skill against this one on both consequential-bug and clean PRs. Record independently confirmed findings and consequences, false positives/irrelevant test requests/style disputes, obsolete-contract applications, whether proposed validation discriminates the hypothesis, and total review time. Keep budgets and available target artifacts equal. Count citations/report length only as cost, never success. Do not claim success from the included seeds or known historical outcomes, and do not build embeddings or expand the corpus until observed recall/decision failures justify them.

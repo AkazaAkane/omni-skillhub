@@ -1,0 +1,481 @@
+{
+  "schema_version": 1,
+  "collector_version": 1,
+  "collector_sha256": "ac311c3c81c91c750f1dc39280265f6f340fe3fc47395330343856d89bd04fcf",
+  "corpus_sha256": "73f251734424d58079c307681bb20baa8382c8c89e661fe1533111551711ffd9",
+  "discussion_event_range": {
+    "earliest": "2026-03-24T01:37:20Z",
+    "latest": "2026-10-29T16:34:33Z"
+  },
+  "episode_count": 9,
+  "episodes": [
+    {
+      "episode_id": "sgl-project/sglang-omni:issue:188",
+      "captured_at": "2026-10-31T06:27:09.263404+00:00",
+      "sources": {
+        "metadata": {
+          "endpoint": "repos/sgl-project/sglang-omni/issues/188",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:08.526068+00:00",
+          "finished_at": "2026-10-31T06:27:08.909453+00:00",
+          "pages": 1,
+          "count": 1
+        },
+        "conversation": {
+          "endpoint": "repos/sgl-project/sglang-omni/issues/188/comments",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:08.910641+00:00",
+          "finished_at": "2026-10-31T06:27:09.262295+00:00",
+          "pages": 1,
+          "count": 8
+        }
+      }
+    },
+    {
+      "episode_id": "sgl-project/sglang-omni:issue:661",
+      "captured_at": "2026-10-31T06:27:10.019207+00:00",
+      "sources": {
+        "metadata": {
+          "endpoint": "repos/sgl-project/sglang-omni/issues/661",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:09.263651+00:00",
+          "finished_at": "2026-10-31T06:27:09.640919+00:00",
+          "pages": 1,
+          "count": 1
+        },
+        "conversation": {
+          "endpoint": "repos/sgl-project/sglang-omni/issues/661/comments",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:09.642129+00:00",
+          "finished_at": "2026-10-31T06:27:10.017506+00:00",
+          "pages": 1,
+          "count": 19
+        }
+      }
+    },
+    {
+      "episode_id": "sgl-project/sglang-omni:pr:1090",
+      "captured_at": "2026-10-31T06:26:56.607637+00:00",
+      "sources": {
+        "metadata": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1090",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:54.014697+00:00",
+          "finished_at": "2026-10-31T06:26:54.385238+00:00",
+          "pages": 1,
+          "count": 1
+        },
+        "conversation": {
+          "endpoint": "repos/sgl-project/sglang-omni/issues/1090/comments",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:54.386611+00:00",
+          "finished_at": "2026-10-31T06:26:54.735205+00:00",
+          "pages": 1,
+          "count": 0
+        },
+        "inline": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1090/comments",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:54.736373+00:00",
+          "finished_at": "2026-10-31T06:26:55.107057+00:00",
+          "pages": 1,
+          "count": 8
+        },
+        "reviews": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1090/reviews",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:55.108359+00:00",
+          "finished_at": "2026-10-31T06:26:55.752116+00:00",
+          "pages": 1,
+          "count": 7
+        },
+        "commits": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1090/commits",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:55.753440+00:00",
+          "finished_at": "2026-10-31T06:26:56.210620+00:00",
+          "pages": 1,
+          "count": 27
+        },
+        "files": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1090/files",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:56.212739+00:00",
+          "finished_at": "2026-10-31T06:26:56.606037+00:00",
+          "pages": 1,
+          "count": 14
+        }
+      }
+    },
+    {
+      "episode_id": "sgl-project/sglang-omni:pr:1104",
+      "captured_at": "2026-10-31T06:26:58.964307+00:00",
+      "sources": {
+        "metadata": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1104",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:56.608029+00:00",
+          "finished_at": "2026-10-31T06:26:56.989276+00:00",
+          "pages": 1,
+          "count": 1
+        },
+        "conversation": {
+          "endpoint": "repos/sgl-project/sglang-omni/issues/1104/comments",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:56.990619+00:00",
+          "finished_at": "2026-10-31T06:26:57.321401+00:00",
+          "pages": 1,
+          "count": 0
+        },
+        "inline": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1104/comments",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:57.322502+00:00",
+          "finished_at": "2026-10-31T06:26:57.631614+00:00",
+          "pages": 1,
+          "count": 0
+        },
+        "reviews": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1104/reviews",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:57.632295+00:00",
+          "finished_at": "2026-10-31T06:26:58.129781+00:00",
+          "pages": 1,
+          "count": 2
+        },
+        "commits": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1104/commits",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:58.130964+00:00",
+          "finished_at": "2026-10-31T06:26:58.563924+00:00",
+          "pages": 1,
+          "count": 2
+        },
+        "files": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1104/files",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:58.564931+00:00",
+          "finished_at": "2026-10-31T06:26:58.963039+00:00",
+          "pages": 1,
+          "count": 18
+        }
+      }
+    },
+    {
+      "episode_id": "sgl-project/sglang-omni:pr:1356",
+      "captured_at": "2026-10-31T06:27:01.383316+00:00",
+      "sources": {
+        "metadata": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1356",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:58.964493+00:00",
+          "finished_at": "2026-10-31T06:26:59.289274+00:00",
+          "pages": 1,
+          "count": 1
+        },
+        "conversation": {
+          "endpoint": "repos/sgl-project/sglang-omni/issues/1356/comments",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:59.290485+00:00",
+          "finished_at": "2026-10-31T06:26:59.606355+00:00",
+          "pages": 1,
+          "count": 0
+        },
+        "inline": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1356/comments",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:59.607472+00:00",
+          "finished_at": "2026-10-31T06:26:59.961129+00:00",
+          "pages": 1,
+          "count": 6
+        },
+        "reviews": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1356/reviews",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:59.962430+00:00",
+          "finished_at": "2026-10-31T06:27:00.450625+00:00",
+          "pages": 1,
+          "count": 1
+        },
+        "commits": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1356/commits",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:00.451704+00:00",
+          "finished_at": "2026-10-31T06:27:00.886058+00:00",
+          "pages": 1,
+          "count": 12
+        },
+        "files": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1356/files",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:00.887618+00:00",
+          "finished_at": "2026-10-31T06:27:01.380361+00:00",
+          "pages": 1,
+          "count": 57
+        }
+      }
+    },
+    {
+      "episode_id": "sgl-project/sglang-omni:pr:1441",
+      "captured_at": "2026-10-31T06:27:03.813714+00:00",
+      "sources": {
+        "metadata": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1441",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:01.383717+00:00",
+          "finished_at": "2026-10-31T06:27:01.813453+00:00",
+          "pages": 1,
+          "count": 1
+        },
+        "conversation": {
+          "endpoint": "repos/sgl-project/sglang-omni/issues/1441/comments",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:01.814896+00:00",
+          "finished_at": "2026-10-31T06:27:02.194591+00:00",
+          "pages": 1,
+          "count": 0
+        },
+        "inline": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1441/comments",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:02.195687+00:00",
+          "finished_at": "2026-10-31T06:27:02.516399+00:00",
+          "pages": 1,
+          "count": 0
+        },
+        "reviews": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1441/reviews",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:02.517513+00:00",
+          "finished_at": "2026-10-31T06:27:03.021366+00:00",
+          "pages": 1,
+          "count": 1
+        },
+        "commits": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1441/commits",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:03.022435+00:00",
+          "finished_at": "2026-10-31T06:27:03.395863+00:00",
+          "pages": 1,
+          "count": 2
+        },
+        "files": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/1441/files",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:03.396972+00:00",
+          "finished_at": "2026-10-31T06:27:03.812747+00:00",
+          "pages": 1,
+          "count": 2
+        }
+      }
+    },
+    {
+      "episode_id": "sgl-project/sglang-omni:pr:3173",
+      "captured_at": "2026-10-31T06:27:06.133653+00:00",
+      "sources": {
+        "metadata": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/3173",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:03.813966+00:00",
+          "finished_at": "2026-10-31T06:27:04.227190+00:00",
+          "pages": 1,
+          "count": 1
+        },
+        "conversation": {
+          "endpoint": "repos/sgl-project/sglang-omni/issues/3173/comments",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:04.228560+00:00",
+          "finished_at": "2026-10-31T06:27:04.555681+00:00",
+          "pages": 1,
+          "count": 0
+        },
+        "inline": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/3173/comments",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:04.556747+00:00",
+          "finished_at": "2026-10-31T06:27:04.845065+00:00",
+          "pages": 1,
+          "count": 0
+        },
+        "reviews": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/3173/reviews",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:04.846124+00:00",
+          "finished_at": "2026-10-31T06:27:05.325604+00:00",
+          "pages": 1,
+          "count": 1
+        },
+        "commits": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/3173/commits",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:05.326488+00:00",
+          "finished_at": "2026-10-31T06:27:05.746693+00:00",
+          "pages": 1,
+          "count": 2
+        },
+        "files": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/3173/files",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:05.748024+00:00",
+          "finished_at": "2026-10-31T06:27:06.132461+00:00",
+          "pages": 1,
+          "count": 8
+        }
+      }
+    },
+    {
+      "episode_id": "sgl-project/sglang-omni:pr:3338",
+      "captured_at": "2026-10-31T06:27:08.525726+00:00",
+      "sources": {
+        "metadata": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/3338",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:06.133919+00:00",
+          "finished_at": "2026-10-31T06:27:06.500793+00:00",
+          "pages": 1,
+          "count": 1
+        },
+        "conversation": {
+          "endpoint": "repos/sgl-project/sglang-omni/issues/3338/comments",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:06.502216+00:00",
+          "finished_at": "2026-10-31T06:27:06.856497+00:00",
+          "pages": 1,
+          "count": 1
+        },
+        "inline": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/3338/comments",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:06.857624+00:00",
+          "finished_at": "2026-10-31T06:27:07.154662+00:00",
+          "pages": 1,
+          "count": 0
+        },
+        "reviews": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/3338/reviews",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:07.155776+00:00",
+          "finished_at": "2026-10-31T06:27:07.629280+00:00",
+          "pages": 1,
+          "count": 0
+        },
+        "commits": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/3338/commits",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:07.630358+00:00",
+          "finished_at": "2026-10-31T06:27:08.047194+00:00",
+          "pages": 1,
+          "count": 1
+        },
+        "files": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/3338/files",
+          "complete": true,
+          "started_at": "2026-10-31T06:27:08.048347+00:00",
+          "finished_at": "2026-10-31T06:27:08.521775+00:00",
+          "pages": 1,
+          "count": 52
+        }
+      }
+    },
+    {
+      "episode_id": "sgl-project/sglang-omni:pr:779",
+      "captured_at": "2026-10-31T06:26:54.014046+00:00",
+      "sources": {
+        "metadata": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/779",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:51.216748+00:00",
+          "finished_at": "2026-10-31T06:26:51.619690+00:00",
+          "pages": 1,
+          "count": 1
+        },
+        "conversation": {
+          "endpoint": "repos/sgl-project/sglang-omni/issues/779/comments",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:51.620906+00:00",
+          "finished_at": "2026-10-31T06:26:52.113560+00:00",
+          "pages": 1,
+          "count": 26
+        },
+        "inline": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/779/comments",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:52.115380+00:00",
+          "finished_at": "2026-10-31T06:26:52.501681+00:00",
+          "pages": 1,
+          "count": 7
+        },
+        "reviews": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/779/reviews",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:52.502997+00:00",
+          "finished_at": "2026-10-31T06:26:53.011992+00:00",
+          "pages": 1,
+          "count": 2
+        },
+        "commits": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/779/commits",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:53.013139+00:00",
+          "finished_at": "2026-10-31T06:26:53.538887+00:00",
+          "pages": 1,
+          "count": 71
+        },
+        "files": {
+          "endpoint": "repos/sgl-project/sglang-omni/pulls/779/files",
+          "complete": true,
+          "started_at": "2026-10-31T06:26:53.541705+00:00",
+          "finished_at": "2026-10-31T06:26:54.011633+00:00",
+          "pages": 1,
+          "count": 31
+        }
+      }
+    }
+  ],
+  "last_attempt": {
+    "collector_version": 1,
+    "run_id": "90992fe5-829e-4365-895a-63c4fe4b397c",
+    "selection": {
+      "repo": "sgl-project/sglang-omni",
+      "pr": [
+        779,
+        1090,
+        1104,
+        1356,
+        1441,
+        3173,
+        3338
+      ],
+      "issue": [
+        188,
+        661
+      ],
+      "participant": null,
+      "since": null
+    },
+    "started_at": "2026-10-31T06:26:51.207350+00:00",
+    "status": "complete",
+    "selected": {
+      "pr": [
+        779,
+        1090,
+        1104,
+        1356,
+        1441,
+        3173,
+        3338
+      ],
+      "issue": [
+        188,
+        661
+      ]
+    },
+    "finished_at": "2026-10-31T06:27:10.109892+00:00"
+  },
+  "coverage": "Bounded selected discussions; completeness applies to listed REST endpoints, not all repository history or per-concern resolution.",
+  "filtering": "No comment, participant, language, or bot filtering; raw context is retained. Participant queries select candidates only.",
+  "refresh_policy": "Upsert selected whole episodes, retain unselected snapshots, refetch every selected endpoint on a new attempt to capture edited/deleted visible comments.",
+  "missing": [
+    "Deleted/private/inaccessible history; earlier comment/body revisions; unselected or undiscovered discussions; GraphQL thread resolution."
+  ]
+}
